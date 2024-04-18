@@ -57,7 +57,8 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Myapp() {
-    var MoneyCounter = remember {
+    // this mutable state form is oprated by using "Variablename.value"
+    var MoneyCounter = remember { //var is used to change the value of the variable
         mutableStateOf(0)
     }
     Scaffold(modifier = Modifier.fillMaxSize(),
@@ -71,7 +72,9 @@ fun Myapp() {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
 
-            Text(text = "$${MoneyCounter.value}", style = TextStyle(color = Color.White,
+            Text(text = "$${MoneyCounter.value}",
+                modifier = Modifier.padding(16.dp),
+                style = TextStyle(color = Color.White,
                 fontSize = 40.sp),
                 fontWeight = FontWeight.ExtraBold)
 
@@ -79,7 +82,7 @@ fun Myapp() {
 
             CreateCircle(MoneyCounter.value){ newvalue ->
                 MoneyCounter.value = newvalue + 1
-                //MoneyCounter.value = it + 1
+                //MoneyCounter.value = it + 1 //by default we can use this "it" to increament the value of the variable
             }
 
             Spacer(modifier = Modifier.height(50.dp))
@@ -104,8 +107,10 @@ fun Myapp() {
 
 
 @Composable
-fun CreateCircle(MoneyCounter: Int = 0, updateMoneyCounter: (Int) -> Unit = {}){
+fun CreateCircle(MoneyCounter: Int = 0, updateMoneyCounter: (Int) -> Unit = {}){ //Int is given as to satisfy the initial value
+    //unit is same as void in java
 
+    //This method can be accessed directly from the variable name
    // var MoneyCounter by remember {
     //    mutableStateOf(0)
    // }
